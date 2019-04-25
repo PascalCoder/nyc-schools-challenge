@@ -10,10 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.nycschoolschallenge.R;
-import com.example.nycschoolschallenge.model.SATScoresPojo;
 import com.example.nycschoolschallenge.model.SchoolPojo;
 import com.example.nycschoolschallenge.view.SchoolDetails;
 
@@ -23,13 +21,11 @@ import java.util.List;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder> {
 
-    private static String TAG = "CustomerAdapter";
+    private static final String TAG = CustomAdapter.class.getSimpleName();
 
     private static List<SchoolPojo> schools;
 
-
     private SchoolPojo schoolPojo;
-
 
     public CustomAdapter(@NonNull List<SchoolPojo> dataSet){this.schools = dataSet;}
 
@@ -86,8 +82,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
                             tvAcademic2.getText().toString(), tvPriority11.getText().toString());
 
                     Log.d(TAG, "onClick: " + schoolPojo.getSchoolName());
-
-                    //Toast.makeText(v.getContext(), "" + schoolPojo.getSchoolName(), Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent();
                     intent.setClass(v.getContext(), SchoolDetails.class);

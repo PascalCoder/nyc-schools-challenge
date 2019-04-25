@@ -25,11 +25,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Presenter implements PresenterContract {
 
+    private static final String TAG = Presenter.class.getSimpleName();
+
     ViewContract viewContract;
     SchoolApi api;
 
-    public static SATScoresPojo satScoresPojo;
-    public static List<SATScoresPojo> satScoresList;
+    /*public static SATScoresPojo satScoresPojo;
+    public static List<SATScoresPojo> satScoresList;*/
 
     @Override
     public void bindView(ViewContract viewContract) {
@@ -39,14 +41,8 @@ public class Presenter implements PresenterContract {
     @Override
     public void initializeRetrofit() {
 
-        /*Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://data.cityofnewyork.us/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build();*/
-
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://data.cityofnewyork.us/") //https://data.cityofnewyork.us/
+                .baseUrl("https://data.cityofnewyork.us/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -72,39 +68,25 @@ public class Presenter implements PresenterContract {
 
     @Override
     public void getAllSATScores() {
-        /*schoolName = schoolName.toUpperCase();
-        api.getScores(schoolName.toUpperCase()).enqueue(new Callback<SATScoresPojo>() {
-            @Override
-            public void onResponse(Call<SATScoresPojo> call, Response<SATScoresPojo> response) {
-                viewContract.populateScores(response.body());
-                satScoresPojo = response.body();
-            }
 
-            @Override
-            public void onFailure(Call<SATScoresPojo> call, Throwable t) {
-                //viewContract.onError(t.getMessage());
-            }
-        });*/
     }
 
     @Override
     public void getAllSATScores(String schoolName) {
-        schoolName = schoolName.toUpperCase();
-        api.getAllScores(schoolName).enqueue(new Callback<List<SATScoresPojo>>() {
+
+        api.getAllScores(schoolName.toUpperCase() ).enqueue(new Callback<List<SATScoresPojo>>() {
             @Override
             public void onResponse(Call<List<SATScoresPojo>> call, Response<List<SATScoresPojo>> response) {
                 viewContract.populateScores(response.body());
-                satScoresList = new ArrayList<>(response.body());
-                Log.d("Presenter", "onResponse: " + response.body());
+                //satScoresList = new ArrayList<>(response.body());
+                Log.d(TAG, "onResponse: " + response.body());
             }
 
             @Override
             public void onFailure(Call<List<SATScoresPojo>> call, Throwable t) {
-
+                Log.d(TAG, "onFailure: " + t.getMessage());
             }
         });
     }
 
-    public static void getSATScores(String schoolName){
-    }
 }

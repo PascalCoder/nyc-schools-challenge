@@ -1,9 +1,13 @@
 package com.example.nycschoolschallenge.view;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.nycschoolschallenge.R;
@@ -18,6 +22,9 @@ public class SchoolDetails extends AppCompatActivity implements ViewContract{
 
     public RecyclerView scoresRecyclerView;
     public static Presenter presenter;
+
+    public CardView cardView;
+    public TextView tvSATMath, tvError; //satMathAvgScore
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +43,15 @@ public class SchoolDetails extends AppCompatActivity implements ViewContract{
 
         presenter.getAllSATScores(schoolName);
 
+        cardView = findViewById(R.id.card_view_details);
+        tvSATMath = findViewById(R.id.tv_math);
+        tvError = findViewById(R.id.tv_error);
 
-        Toast.makeText(this, "" + schoolName, Toast.LENGTH_SHORT).show();
+        /*if(tvSATMath.getText().toString().equals("") || tvSATMath.getText().toString() == null){
+            cardView.setCardBackgroundColor(Color.WHITE);
+            tvError.setVisibility(View.VISIBLE);
+        }*/
+        //Toast.makeText(this, "" + schoolName, Toast.LENGTH_SHORT).show();
     }
 
     @Override

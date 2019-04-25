@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">NYCSchoolsChallenge</string>
+    <string name="school_details">School Details</string>
+    <string name="info_error">Sorry but this School does not have any info to be displayed.</string>
 </resources>
